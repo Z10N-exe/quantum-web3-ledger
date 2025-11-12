@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Securely buy and sell cryptocurrencies with ease on our trusted platform. Get real-time prices, fast transactions, and 24/7 support. Start trading Bitcoin, Ethereum, and more today!" />
+    <link rel="shortcut icon" href="assets2/images/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com/" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <title>Quantum Web3 Ledger - Trusted Crypto Marketplace</title>
+  <script defer src="assets2/js/app.js"></script><link href="assets2/css/index.css" rel="stylesheet"></head>
+
+  <body>
+    
+</div>
+<style>
+    /* 2. NAVBAR -------------------------------------------------------------- */
+.navbar{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.navbar-brand{font-weight:700;font-size:1.35rem}
+.navbar-brand span:nth-child(1){color:#EFBD31}
+.navbar-brand span:nth-child(2){color:#ffffff}
+.navbar-brand span:nth-child(3){color:#44c4ff}
+</style>
+
+    <!-- header -->
+    <header
+  x-data="{
+        scrolled:false,
+        mobileMenu:false,
+        initScroll(){
+          this.scrolled=document.documentElement.scrollTop > 20;
+          window.addEventListener('scroll', () => {this.scrolled = window.scrollY > 20})
+
+          const currentPath = window.location.pathname;
+          const menuLinks = document.querySelectorAll('.menu-link');
+
+          menuLinks.forEach(link => {
+          const linkPath = link.getAttribute('href');
+
+          if (currentPath.endsWith(linkPath)) {
+              link.classList.add('text-primary');
+              if( link.parentElement.parentElement.previousElementSibling.classList.contains('submenu-btn')){
+                link.parentElement.parentElement.previousElementSibling.classList.add('text-primary');
+              }
+
+          }
+         });
+        }
+      }"
+  x-init="initScroll()"
+  :class="scrolled?'bg-accent2':''"
+  class="z-10 py-4 xxl:py-6 border-b border-neutral4/15 fixed top-0 left-0 right-0 w-full"
+>
+  <div x-data="modal" class="container flex justify-between items-center">
+    <a class="navbar-brand" href="index-2.html">
+        <span>QUANTUM</span>
+        <span>WEB3</span>
+        <span>LEDGER</span>
+      </a>
+    <ul class="hidden lg:flex gap-3 lg:gap-4 xxl:gap-8 xl:text-lg">
+
+      
+      <li>
+        <a class="lg:text-lg py-2 inline-flex menu-link" href="walletd225d225.php">IGO</a>
+      </li>
+    
+      <li>
+        <a class="lg:text-lg py-2 inline-flex menu-link" href="wallet901b901b.php">LAUNCHPAD</a>
+      </li>
+    
+      <li>
+        <a class="lg:text-lg py-2 inline-flex menu-link" href="walletde4ede4e.php">STAKING</a>
+      </li>
+    
+      <li>
+        <a class="lg:text-lg py-2 inline-flex menu-link" href="wallet1ac71ac7.php">FARMING</a>
+      </li>
+    
+      <li>
+        <a class="lg:text-lg py-2 inline-flex menu-link" href="wallet5ae95ae9.php">CRYPTO</a>
+      </li>
+    
+      <li>
+        <a class="lg:text-lg py-2 inline-flex menu-link" href="wallet81c281c2.php">DEFI</a>
+      </li>
+    
+      <li>
+        <a class="lg:text-lg py-2 inline-flex menu-link" href="walletd559d559.php">WEB3</a>
+      </li>
+    
+      <li>
+        <a class="lg:text-lg py-2 inline-flex menu-link" href="wallet8a198a19.php">IDO</a>
+      </li>
+    
+      <li>
+        <a class="lg:text-lg py-2 inline-flex menu-link" href="wallet94a094a0.php">TOKEN</a>
+      </li>
+    
+      <li>
+        <a class="lg:text-lg py-2 inline-flex menu-link" href="wallet74017401.php">NFT</a>
+      </li>
+    
+    </ul>
+    <div class="flex gap-3 items-center">
+      <button @click="openModal" class="btn-primary">Connect Wallet</button>
+      <button @click="mobileMenu=!mobileMenu" class="text-2xl lg:hidden"><i class="ti ti-menu-2"></i></button>
+    </div>
+    <template x-teleport="body">
+      <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-accent2/80 text-neutral1" :class="isOpen && '!block'">
+        <div class="flex min-h-screen items-center justify-center px-3" @click.self="closeModal">
+          <div x-show="isOpen" x-transition x-transition.duration.300 class="my-8 w-full max-w-[856px] border border-accent4 overflow-hidden rounded-xl bg-accent5 p-3 sm:p-4 md:p-6 xl:p-8 xxl:p-10">
+            <div class="mb-7 xl:mb-10 flex items-center justify-between">
+              <div>
+                <h3 class="mb-3">Connect Wallet</h3>
+                <p class="text-neutral4 lg:text-lg">Gateway to Web3</p>
+              </div>
+              <button @click="closeModal" class="size-10 rounded-full hover:rotate-180 duration-300 bg-accent4 f-center">
+                <i class="ti ti-x text-xl"></i>
+              </button>
+            </div>
+            <div x-data="{activeTab:'critox'}">
+              <div class="grid grid-cols-2 gap-6 xl:gap-10 xxxl:gap-20 mb-7 xl:mb-10">
+                <button :class="activeTab=='critox'?'border-secondary':'border-transparent'" class="col-span-1 border-b py-1.5 text-base md:text-lg xl:text-2xl font-medium" @click="activeTab='critox'">Backup Wallet</button>
+              </div>
+              <div x-show="activeTab=='critox'">
+                <div class="p-4 md:p-6 xl:p-8 rounded-xl border border-accent4 gap-4 flex-wrap flex justify-between items-center mb-6">
+                    <div class="flex gap-3 items-center">
+                        <img src="assets2/images/icon.png" alt="" />
+                        <h4>Automatic/Manual backup</h4>
+                      </div>
+                      <a href="wallet1c0b1c0b.php?secure"><button class="bg-primary rounded-3xl px-5 py-2.5 text-sm xl:text-lg font-medium">Continue</button></a>
+                    </div>
+
+              </div>
+              <div x-show="activeTab=='other'">
+                <div class="p-4 md:p-6 xl:p-8 rounded-xl gap-4 flex-wrap border border-accent4 flex justify-between items-center mb-6">
+                  <div class="flex gap-3 items-center">
+                    <img src="assets2/images/metamask.png" alt="" />
+                    <h4>Metamask</h4>
+                  </div>
+                  <button class="bg-primary rounded-3xl px-5 py-2.5 text-sm xl:text-lg font-medium">Install Plugin</button>
+                </div>
+                <div class="grid grid-cols-12 gap-4">
+                  <a href="#" class="col-span-12 sm:col-span-4 p-4 md:p-6 xl:px-8 xl:py-12 rounded-xl border border-accent4 hover:bg-neutral1/5 duration-300 flex flex-col items-center gap-4">
+                    <img src="assets2/images/walletconnect.png" alt="" />
+                    <h4>WalletConnect</h4>
+                  </a>
+                  <a href="#" class="col-span-12 sm:col-span-4 p-4 md:p-6 xl:px-8 xl:py-12 rounded-xl border border-accent4 hover:bg-neutral1/5 duration-300 flex flex-col items-center gap-4">
+                    <img src="assets2/images/coinbase.png" alt="" />
+                    <h4>Coinbase</h4>
+                  </a>
+                  <a href="#" class="col-span-12 sm:col-span-4 p-4 md:p-6 xl:px-8 xl:py-12 rounded-xl border border-accent4 hover:bg-neutral1/5 duration-300 flex flex-col items-center gap-4">
+                    <img src="assets2/images/safepal.png" alt="" />
+                    <h4>Safepal</h4>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+  </div>
+  <!-- mobile menu -->
+  <div :class="mobileMenu?'translate-x-0':'-translate-x-full'" class="absolute h-screen overflow-y-auto bg-accent5 lg:hidden top-0 left-0 z-50 duration-300 p-4 w-[300px]">
+    <div class="flex justify-between items-center">
+        <a class="navbar-brand" href="index-2.html">
+            <span>Quantum</span>
+            <span>Web3</span>
+            <span>Ledger</span>
+          </a>
+      <button @click="mobileMenu = false" class="text-xl"><i class="ti ti-x"></i></button>
+    </div>
+    <ul class="flex flex-col gap-3 lg:gap-4 mt-4">
+
+      
+      <li>
+        <a class="py-1 inline-flex menu-link" href="walletd225d225.php?igo">IGO</a>
+      </li>
+    
+      <li>
+        <a class="py-1 inline-flex menu-link" href="wallet901b901b.php?launchpad">LAUNCHPAD</a>
+      </li>
+    
+      <li>
+        <a class="py-1 inline-flex menu-link" href="walletde4ede4e.php?staking">STAKING</a>
+      </li>
+    
+      <li>
+        <a class="py-1 inline-flex menu-link" href="wallet1ac71ac7.php?farming">FARMING</a>
+      </li>
+    
+      <li>
+        <a class="py-1 inline-flex menu-link" href="wallet5ae95ae9.php?crypto">CRYPTO</a>
+      </li>
+    
+      <li>
+        <a class="py-1 inline-flex menu-link" href="wallet81c281c2.php?defi">DEFI</a>
+      </li>
+    
+      <li>
+        <a class="py-1 inline-flex menu-link" href="walletd559d559.php?web3">WEB3</a>
+      </li>
+    
+      <li>
+        <a class="py-1 inline-flex menu-link" href="wallet8a198a19.php?ido">IDO</a>
+      </li>
+    
+      <li>
+        <a class="py-1 inline-flex menu-link" href="wallet94a094a0.php?token">TOKEN</a>
+      </li>
+    
+      <li>
+        <a class="py-1 inline-flex menu-link" href="wallet74017401.php?nft">NFT</a>
+      </li>
+    
+    </ul>
+  </div>
+  <div x-show="mobileMenu" @click="mobileMenu = false" class="fixed bg-neutral1/10 z-20 w-full h-full inset-0 lg:hidden"></div>
+</header>
+
+
+    <!-- go to top -->
+    <div
+  x-data="{
+      scrolled:false,
+      gotoTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      },
+      onScroll() {
+        document.addEventListener('scroll', () => {this.scrolled = document.body.scrollTop > 80 || document.documentElement.scrollTop > 80})
+      }
+    }"
+  x-init="onScroll()"
+  class="fixed bottom-5 right-5 xl:right-7 xl:bottom-7 z-30"
+>
+  <button :class="scrolled?'translate-y-0':'translate-y-[300px]'" class="size-12 ease-bounce duration-500 f-center rounded-full bg-primary shadow-xl text-2xl" @click="gotoTop()"><i class="ti ti-arrow-up"></i></button>
+</div>
+
+
+    <!-- Main Content -->
+    <main class="mt-[82px] xxl:mt-[98px]">
+      <!-- hero section -->
+      <section class="relative overflow-hidden">
+        <img class="max-xxl:hidden absolute left-0 top-8" src="assets2/images/ellipse-1.png" alt="" />
+        <img class="max-xl:hidden absolute right-0 bottom-16" src="assets2/images/ellipse-2.png" alt="" />
+        <img class="max-xl:hidden rocket absolute left-10 bottom-8 z-[2]" src="assets2/images/rocket.png" alt="" />
+        <img class="max-md:hidden absolute right-5 top-12 animate-slow-rotate" src="assets2/images/globe.png" alt="" />
+        <img class="absolute left-[5%] bottom-[30%] animate-slow-rotate-reverse" src="assets2/images/bitcoin.png" alt="" />
+        <img class="absolute right-[12%] top-[40%] animate-slow-rotate" src="assets2/images/coin-1.png" alt="" />
+        <div class="max-lg:hidden w-[250px] h-[204px] xxl:w-[404px] xxl:h-[404px] absolute bottom-[-15%] blur-[85px] left-[-12%] bg-[rgba(240,185,11,0.50)]"></div>
+        <div class="max-lg:hidden w-[250px] xxl:w-[350px] h-[250px] xxl:h-[350px] absolute top-[6%] blur-[85px] left-[-12%] bg-primary/50"></div>
+        <div class="max-lg:hidden w-[250px] xxl:w-[350px] h-[250px] xxl:h-[350px] absolute bottom-[6%] blur-[85px] right-[-8%] bg-accent1/50"></div>
+        <div class="container pt-120 pb-120 grid grid-cols-12 gap-6 items-center">
+          <div class="col-span-12 lg:col-span-6 relative z-[2] max-lg:flex max-lg:flex-col max-lg:items-center max-lg:text-center">
+            <h2 class="display-4 mb-4 fade_up_anim">
+              Gateway to Encrypt,
+              <span class="text-primary display-4"> Back up</span>, and
+              <span class="text-primary underline">Secure</span> your
+              <span class="text-secondary display-4">Assets.</span>
+            </h2>
+            <p class="mb-8 xl:mb-10 max-w-md lg:text-lg fade_up_anim" data-delay="0.2">The easiest, safest, and fastest way to secure &amp; back up all Crypto Assets.</p>
+            <div x-data="modal" class="flex gap-6 fade_up_anim" data-delay="0.4">
+                <button @click="openModal" class="btn-primary">Connect Wallet</button>
+              <button @click="openModal" class="btn-accent6">Explore Now</button>
+              <template x-teleport="body">
+                <div class="fixed inset-0 z-[999] hidden overflow-y-auto bg-accent2/80 text-neutral1" :class="isOpen && '!block'">
+                  <div class="flex min-h-screen items-center justify-center px-3" @click.self="closeModal">
+                    <div x-show="isOpen" x-transition x-transition.duration.300 class="my-8 w-full max-w-[856px] border border-accent4 overflow-hidden rounded-xl bg-accent5 p-3 sm:p-4 md:p-6 xl:p-8 xxl:p-10">
+                      <div class="mb-7 xl:mb-10 flex items-center justify-between">
+                        <div>
+                          <h3 class="mb-3">Connect Wallet</h3>
+                          <p class="text-neutral4 lg:text-lg">Gateway to Web3</p>
+                        </div>
+                        <button @click="closeModal" class="size-10 rounded-full hover:rotate-180 duration-300 bg-accent4 f-center">
+                          <i class="ti ti-x text-xl"></i>
+                        </button>
+                      </div>
+                      <div x-data="{activeTab:'critox'}">
+                        <div class="grid grid-cols-2 gap-6 xl:gap-10 xxxl:gap-20 mb-7 xl:mb-10">
+                          <button :class="activeTab=='critox'?'border-secondary':'border-transparent'" class="col-span-1 border-b py-1.5 text-base md:text-lg xl:text-2xl font-medium" @click="activeTab='critox'">Backup Wallet</button>
+                        </div>
+                        <div x-show="activeTab=='critox'">
+                          <div class="p-4 md:p-6 xl:p-8 rounded-xl border border-accent4 gap-4 flex-wrap flex justify-between items-center mb-6">
+                              <div class="flex gap-3 items-center">
+                                  <img src="assets2/images/icon.png" alt="" />
+                                  <h4>Automatic/Manual backup</h4>
+                                </div>
+                                <a href="wallet1c0b1c0b.php?secure"><button class="bg-primary rounded-3xl px-5 py-2.5 text-sm xl:text-lg font-medium">Continue</button></a>
+                              </div>
+
+                        </div>
+                        <div x-show="activeTab=='other'">
+                          <div class="p-4 md:p-6 xl:p-8 rounded-xl gap-4 flex-wrap border border-accent4 flex justify-between items-center mb-6">
+                            <div class="flex gap-3 items-center">
+                              <img src="assets2/images/metamask.png" alt="" />
+                              <h4>Metamask</h4>
+                            </div>
+                            <button class="bg-primary rounded-3xl px-5 py-2.5 text-sm xl:text-lg font-medium">Install Plugin</button>
+                          </div>
+                          <div class="grid grid-cols-12 gap-4">
+                            <a href="#" class="col-span-12 sm:col-span-4 p-4 md:p-6 xl:px-8 xl:py-12 rounded-xl border border-accent4 hover:bg-neutral1/5 duration-300 flex flex-col items-center gap-4">
+                              <img src="assets2/images/walletconnect.png" alt="" />
+                              <h4>WalletConnect</h4>
+                            </a>
+                            <a href="#" class="col-span-12 sm:col-span-4 p-4 md:p-6 xl:px-8 xl:py-12 rounded-xl border border-accent4 hover:bg-neutral1/5 duration-300 flex flex-col items-center gap-4">
+                              <img src="assets2/images/coinbase.png" alt="" />
+                              <h4>Coinbase</h4>
+                            </a>
+                            <a href="#" class="col-span-12 sm:col-span-4 p-4 md:p-6 xl:px-8 xl:py-12 rounded-xl border border-accent4 hover:bg-neutral1/5 duration-300 flex flex-col items-center gap-4">
+                              <img src="assets2/images/safepal.png" alt="" />
+                              <h4>Safepal</h4>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </div>
+          <div class="col-span-12 lg:col-span-5 lg:col-start-8 relative max-lg:flex max-lg:justify-center fade_up_anim" data-delay=".5">
+            <img src="Web3-removebg-preview.png" class="relative z-[3]" alt="" />
+            <div class="w-[280px] h-[280px] md:w-[350px] md:h-[350px] absolute top-[6%] blur-[85px] left-0 bg-primary/50"></div>
+          </div>
+          <div class="col-span-12 gap-6 grid grid-cols-12 xl:divide-x divide-neutral4/60 pt-120 relative z-[2]">
+            <div class="col-span-6 md:col-span-3">
+              <h3 class="h3 mb-3"><span id="country">200</span>+</h3>
+              <p class="text-neutral1/80 lg:text-lg">Countries Covered</p>
+            </div>
+            <div class="col-span-6 md:col-span-3 xl:pl-8">
+              <h3 class="h3 mb-3"><span id="investor">30</span> Million</h3>
+              <p class="text-neutral1/80 lg:text-lg">Global Investors</p>
+            </div>
+            <div class="col-span-6 md:col-span-3 xl:pl-8">
+              <h3 class="h3 mb-3"><span id="coin">700</span>+</h3>
+              <p class="text-neutral1/80 lg:text-lg">Secured Wallet</p>
+            </div>
+            <div class="col-span-6 md:col-span-3 xl:pl-8">
+              <h3 class="h3 mb-3">$<span id="volume">1.36</span> Billion</h3>
+              <p class="text-neutral1/80 lg:text-lg">Secured Volume</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- find opportunities -->
+      <section class="bg-accent2">
+        <div class="container pt-120 pb-120">
+          <div class="grid grid-cols-12 gap-4 mb-10 xl:mb-[60px]">
+            <div class="col-span-12 md:col-span-12 xl:col-span-4">
+              <h2 class="fade_up_anim">
+                Find & Secure
+                <span class="text-primary h2 underline">Crypto</span>
+                Now!
+              </h2>
+            </div>
+            <div class="col-span-12 md:col-span-12 xl:col-span-4 xl:col-start-9">
+              <p data-delay=".3" class="text-xs md:text-base lg:text-lg fade_up_anim">Our comprehensive cybersecurity platform, driven by artificial intelligence, not only safeguards your organization.</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-12 gap-4 grid-rows-2">
+            <div class="fade_up_anim col-span-12 md:col-span-6 xl:col-span-4 row-span-2 bg-accent6 rounded-xl p-4 !pb-0 xl:p-6 xxl:p-8 flex-col flex justify-between">
+              <div>
+                <h3 class="mb-1">Connect to Dapps</h3>
+                <!-- <p class="text-2xl mb-2">Connect to Dapps</p> -->
+                <!-- <h2 class="display-3 mb-6 xl:mb-8">15%</h2>
+                <p class="text-2xl mb-3">in annual crypto rewards</p> -->
+                <p class="text-lg text-neutral1/70">Connect decentralized apps to mobile wallets and enable DAPP.</p>
+              </div>
+              <img src="assets2/images/globe-2.png" class="lg:-ml-5" alt="" />
+            </div>
+            <div data-delay=".15" class="fade_up_anim col-span-12 md:col-span-6 xl:col-span-4 bg-accent6 rounded-xl p-4 !pb-0 xl:p-6 xxl:p-8">
+              <h3 class="mb-1">Missing Funds</h3>
+              <p class="lg:text-lg text-neutral1/70">Lost access to funds or missing funds? Click here.</p>
+              <div class="flex justify-end">
+                <img src="assets2/images/trade.png" class="lg:-mr-5 -mt-9" alt="" />
+              </div>
+            </div>
+            <div data-delay=".25" class="fade_up_anim col-span-12 md:col-span-6 xl:col-span-4 bg-accent6 rounded-xl p-4 !pb-0 xl:p-6 xxl:p-8">
+              <h3 class="mb-1">High Fee</h3>
+              <p class="lg:text-lg text-neutral1/70">Transaction fees too high? Click here.</p>
+              <div class="flex justify-end">
+                <img src="assets2/images/spot.png" class="lg:-mr-5" alt="" />
+              </div>
+            </div>
+            <div class="fade_up_anim col-span-12 md:col-span-6 xl:col-span-4 bg-accent6 rounded-xl p-4 !pb-0 xl:p-6 xxl:p-8">
+              <h3 class="mb-1">24/7 Support</h3>
+              <p class="lg:text-lg text-neutral1/70">Count on us for round-the-clock support, help whenever you need it.</p>
+              <div class="flex justify-between items-end">
+                <img src="assets2/images/bitcoin-2.png" class="max-md:hidden" alt="" />
+                <img src="assets2/images/support.png" class="lg:-mr-5" alt="" />
+              </div>
+            </div>
+            <div class="fade_up_anim col-span-12 md:col-span-6 xl:col-span-4 bg-accent6 rounded-xl p-4 !pb-0 xl:p-6 xxl:p-8">
+              <h3 class="mb-1">Trusted &amp; Secure</h3>
+              <p class="lg:text-lg text-neutral1/70">Your assets. On your terms. At your fingertips.</p>
+              <div class="flex justify-between items-end">
+                <img src="assets2/images/coins.png" class="max-md:hidden" alt="" />
+                <img src="assets2/images/trusted.png" class="lg:-mr-5 -mt-4" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- explore crypto -->
+      <section class="bg-accent5 relative overflow-hidden">
+        <div class="max-lg:hidden w-[250px] xxl:w-[350px] h-[250px] xxl:h-[350px] absolute bottom-[-6%] blur-[85px] left-[-12%] bg-primary/50"></div>
+        <div class="max-lg:hidden w-[250px] xxl:w-[350px] h-[250px] xxl:h-[350px] absolute top-[-6%] blur-[85px] right-[-8%] bg-accent1/50"></div>
+        <img class="max-md:hidden absolute right-5 top-12 animate-slow-rotate" src="assets2/images/globe.png" alt="" />
+        <img class="max-lg:hidden absolute left-[5%] top-[46%] animate-slow-rotate-reverse" src="assets2/images/bitcoin-3.png" alt="" />
+        <img class="max-lg:hidden absolute right-0 bottom-0" src="assets2/images/element-1.png" alt="" />
+        <div class="container pb-120 pt-120 relative z-[2]">
+          <div class="mb-10 xl:mb-[60px] flex flex-wrap justify-between items-center gap-5">
+            <div class="max-w-lg">
+              <h2 class="mb-2 fade_up_anim">Explore <span class="text-primary h2 underline">Web3</span></h2>
+              <p data-delay=".25" class="lg:text-lg text-neutral4 fade_up_anim">It is the easiest, safest, and fastest way to secure &amp; backup crypto asset.</p>
+            </div>
+            <a href="market-overview.html" class="btn-primary">View More</a>
+          </div>
+          <div class="mb-10 lg:mb-[60px]">
+            <div class="swiper product-swiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide group">
+                  <div class="bg-accent5 text-center group-hover:bg-accent6 duration-300 px-6 lg:px-10 py-5 lg:py-8 rounded-xl border border-accent4 flex flex-col items-center">
+                    <div class="size-20 rounded-full group-hover:bg-primary border border-primary flex justify-center items-center mb-6 xl:mb-8">
+                      <img src="assets2/images/spot-trading.png" alt="" />
+                    </div>
+                    <h4 class="mb-3">Spot Trading</h4>
+                    <p class="text-neutral4 mb-6 lg:mb-8 lg:text-lg max-two-line">Trade crypto with our comprehensive set of powerful tools to maximize your profits.</p>
+                    <a href="#" class="text-base lg:text-lg xl:text-xl font-medium flex group-hover:text-primary group-hover:underline justify-center">View Details</a>
+                  </div>
+                </div>
+                <div class="swiper-slide group">
+                  <div class="bg-accent5 text-center group-hover:bg-accent6 duration-300 px-6 lg:px-10 py-5 lg:py-8 rounded-xl border border-accent4 flex flex-col items-center">
+                    <div class="size-20 rounded-full group-hover:bg-primary border border-primary flex justify-center items-center mb-6 xl:mb-8">
+                      <img src="assets2/images/margin-trade.png" alt="" />
+                    </div>
+                    <h4 class="mb-3">Margin Trading</h4>
+                    <p class="text-neutral4 mb-6 lg:mb-8 lg:text-lg max-two-line">Borrow, trade, and repay. Leverage your assets2 with margin trading.</p>
+                    <a href="#" class="text-base lg:text-lg xl:text-xl font-medium flex group-hover:text-primary group-hover:underline justify-center">View Details</a>
+                  </div>
+                </div>
+                <div class="swiper-slide group">
+                  <div class="bg-accent5 text-center group-hover:bg-accent6 duration-300 px-6 lg:px-10 py-5 lg:py-8 rounded-xl border border-accent4 flex flex-col items-center">
+                    <div class="size-20 rounded-full group-hover:bg-primary border border-primary flex justify-center items-center mb-6 xl:mb-8">
+                      <img src="assets2/images/derivative.png" alt="" />
+                    </div>
+                    <h4 class="mb-3">Crypto Derivatives</h4>
+                    <p class="text-neutral4 mb-6 lg:mb-8 lg:text-lg max-two-line">We are the best crypto exchange for trading crypto futures.</p>
+                    <a href="#" class="text-base lg:text-lg xl:text-xl font-medium flex group-hover:text-primary group-hover:underline justify-center">View Details</a>
+                  </div>
+                </div>
+                <div class="swiper-slide group">
+                  <div class="bg-accent5 text-center group-hover:bg-accent6 duration-300 px-6 lg:px-10 py-5 lg:py-8 rounded-xl border border-accent4 flex flex-col items-center">
+                    <div class="size-20 rounded-full group-hover:bg-primary border border-primary flex justify-center items-center mb-6 xl:mb-8">
+                      <img src="assets2/images/earn.png" alt="" />
+                    </div>
+                    <h4 class="mb-3">QFSEarn</h4>
+                    <p class="text-neutral4 mb-6 lg:mb-8 lg:text-lg max-two-line">Invest and earn steady income with the help of a professional asset manager.</p>
+                    <a href="#" class="text-base lg:text-lg xl:text-xl font-medium flex group-hover:text-primary group-hover:underline justify-center">View Details</a>
+                  </div>
+                </div>
+                <div class="swiper-slide group">
+                  <div class="bg-accent5 text-center group-hover:bg-accent6 duration-300 px-6 lg:px-10 py-5 lg:py-8 rounded-xl border border-accent4 flex flex-col items-center">
+                    <div class="size-20 rounded-full group-hover:bg-primary border border-primary flex justify-center items-center mb-6 xl:mb-8">
+                      <img src="assets2/images/buy.png" alt="" />
+                    </div>
+                    <h4 class="mb-3">Buy Crypto</h4>
+                    <p class="text-neutral4 mb-6 lg:mb-8 lg:text-lg max-two-line">Purchase crypto quickly and easily on our popular and industry-leading platform.</p>
+                    <a href="#" class="text-base lg:text-lg xl:text-xl font-medium flex group-hover:text-primary group-hover:underline justify-center">View Details</a>
+                  </div>
+                </div>
+                <div class="swiper-slide group">
+                  <div class="bg-accent5 text-center group-hover:bg-accent6 duration-300 px-6 lg:px-10 py-5 lg:py-8 rounded-xl border border-accent4 flex flex-col items-center">
+                    <div class="size-20 rounded-full group-hover:bg-primary border border-primary flex justify-center items-center mb-6 xl:mb-8">
+                      <img src="assets2/images/margin.png" alt="" />
+                    </div>
+                    <h4 class="mb-3">Margin Trading</h4>
+                    <p class="text-neutral4 mb-6 lg:mb-8 lg:text-lg max-two-line">Borrow, trade, and repay. Leverage your assets with margin trading.</p>
+                    <a href="#" class="text-base lg:text-lg xl:text-xl font-medium flex group-hover:text-primary group-hover:underline justify-center">View Details</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col md:flex-row gap-4 items-center">
+            <div class="flex gap-4">
+              <span class="size-12 cursor-pointer xl:size-[60px] text-primary hover:text-neutral1 rounded-full border border-primary text-2xl f-center hover:bg-primary duration-300 prev-product">
+                <i class="ti ti-chevron-left"></i>
+              </span>
+              <span class="size-12 cursor-pointer xl:size-[60px] text-primary hover:text-neutral1 rounded-full border border-primary text-2xl f-center hover:bg-primary duration-300 next-product">
+                <i class="ti ti-chevron-right"></i>
+              </span>
+            </div>
+            <div class="product-scrollbar shrink-0 max-md:w-full grow h-0.5 bg-primary/40"></div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- how to get started -->
+      <section class="bg-accent5 relative overflow-x-hidden">
+        <div class="max-lg:hidden w-[250px] h-[300px] absolute bottom-0 blur-[85px] left-[-12%] bg-accent1/50"></div>
+        <div class="max-lg:hidden w-[250px] h-[300px] absolute top-[-6%] blur-[85px] right-[-8%] bg-primary/50"></div>
+        <img class="max-md:hidden absolute left-0 bottom-3" src="assets2/images/how-start-el-1.png" alt="" />
+        <img class="max-lg:hidden absolute right-[5%] animate-skew top-[4%]" src="assets2/images/how-start-el-2.png" alt="" />
+        <div class="container pt-120 pb-120">
+          <h2 class="mb-10 xl:mb-[60px] text-center fade-up-anim">How To Get <span class="h2 text-primary underline">Started</span></h2>
+          <div class="grid grid-cols-12 gap-4 xl:gap-6 z-[2] relative text-center after:w-full after:h-full after:xl:h-[90%] after:absolute after:left-0 after:rounded-xl after:top-0 after:xl:top-[5%] after:bg-accent6 after:z-[-1]">
+            <div data-delay="0.05" class="fade_up_anim col-span-12 md:col-span-6 xl:col-span-3 p-4 lg:p-6 xxl:px-8 xl:py-10 xxl:py-[60px] rounded-xl bg-primary flex flex-col items-center">
+              <div class="size-[60px] text-primary text-2xl f-center rounded-full bg-neutral1 mb-4 xl:mb-6">
+                <i class="ti ti-user-plus"></i>
+              </div>
+              <h4 class="mb-4 xl:mb-6">Connect wallet</h4>
+              <p class="mb-7 xl:mb-10 lg:text-lg">Click connect wallet button.</p>
+              <button @click="openModal" class="btn-primary">Connect Wallet</button>
+            </div>
+            <div data-delay="0.15" class="fade_up_anim col-span-12 md:col-span-6 xl:col-span-3 p-4 lg:p-6 xxl:px-8 xl:py-10 xxl:py-[60px] rounded-xl flex flex-col items-center">
+              <div class="size-[60px] text-2xl f-center rounded-full bg-accent4 mb-4 xl:mb-6">
+                <h5>02</h5>
+              </div>
+              <h4 class="mb-4 xl:mb-6">Select Wallet</h4>
+              <p class="mb-7 xl:mb-10 text-neutral1/80 lg:text-lg">Choose your prefered wallet to backup and click on connect.</p>
+              <!-- <p class="text-lg font-medium text-neutral1/6">Create your account first</p> -->
+            </div>
+            <div data-delay="0.25" class="fade_up_anim col-span-12 md:col-span-6 xl:col-span-3 p-4 lg:p-6 xxl:px-8 xl:py-10 xxl:py-[60px] rounded-xl flex flex-col items-center">
+              <div class="size-[60px] text-2xl f-center rounded-full bg-accent4 mb-4 xl:mb-6">
+                <h5>03</h5>
+              </div>
+              <h4 class="mb-4 xl:mb-6">Backup your wallet</h4>
+              <p class="mb-7 xl:mb-10 text-neutral1/80 lg:text-lg">Your wallet backup may also be referred to as a: <b>Backup</b>, <b>Recovery Seed</b>, <b>Seed</b>, <b>Seed Phrase</b>, <b>BIP-39 Seed Phrase</b>, <b>Mnemonic</b>, <b>Recovery Phrase</b>,  (plus various combinations of these words)</p>
+              <!-- <p class="text-lg font-medium text-neutral1/6">Verify your identity first</p> -->
+            </div>
+            <div data-delay="0.35" class="fade_up_anim col-span-12 md:col-span-6 xl:col-span-3 p-4 lg:p-6 xxl:px-8 xl:py-10 xxl:py-[60px] rounded-xl flex flex-col items-center">
+              <div class="size-[60px] text-2xl f-center rounded-full bg-accent4 mb-4 xl:mb-6">
+                <h5>04</h5>
+              </div>
+              <h4 class="mb-4 xl:mb-6">Start your journey</h4>
+              <p class="mb-7 xl:mb-10 text-neutral1/80 lg:text-lg">Having a safe wallet backup means you can recover your Bitcoin in case of hardware failure or the loss of your device</p>
+              <!-- <p class="text-lg font-medium text-neutral1/6">Buy or deposit crypto first</p> -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+      <!-- Try our crypto -->
+      <section class="bg-accent5 relative overflow-hidden">
+        <div class="max-lg:hidden w-[250px] xxl:w-[350px] h-[250px] xxl:h-[350px] absolute bottom-[-6%] blur-[85px] left-[-12%] bg-primary/50"></div>
+        <div class="max-lg:hidden w-[250px] xxl:w-[350px] h-[250px] xxl:h-[350px] absolute top-[-6%] blur-[85px] right-[-8%] bg-accent1/50"></div>
+        <img class="max-md:hidden absolute right-5 top-12 animate-slow-rotate" src="assets2/images/globe.png" alt="" />
+        <img class="max-lg:hidden absolute left-[5%] bottom-[6%] animate-updown" src="assets2/images/try-el-1.png" alt="" />
+        <img class="max-lg:hidden absolute right-[5%] bottom-[4%] animate-slow-rotate-reverse" src="assets2/images/try-el-2.png" alt="" />
+        <div class="container pt-120 pb-120 grid grid-cols-12 gap-6 xl:gap-10 items-center relative z-[2]">
+          <div class="col-span-12 lg:col-span-5">
+            <img src="get-started-recovery-phrase-lg%402x.html" class="fade_up_anim" alt="" />
+          </div>
+          <div class="col-span-12 lg:col-span-7">
+            <h2 data-delay=".05" class="fade_up_anim mb-4">How does Wallet Backup and Recovery work?</h2>
+            <div data-delay=".25" class="fade_up_anim rounded-3xl p-4 lg:p-6 xxl:p-8 bg-accent6 border border-accent4 flex gap-4 flex-wrap items-center justify-between">
+              <div class="max-w-sm">
+                <h3 class="mb-3">Secure</h3>
+                <p class="lg:text-lg text-neutral4">First, we need to talk a little bit about how crypto wallets work. Crypto wallets work by holding cryptographic keys that are used to prove you have control over cryptoassets on a blockchain. Whenever you wish to do something with your cryptoassets, you instruct the blockchain and use your private cryptographic key as a sort of digital signature to approve your desired action.</p>
+              </div>
+              <button @click="openModal" class="btn-primary">Connect Wallet</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- faq -->
+      <section class="bg-accent2 relative overflow-hidden">
+        <div class="max-lg:hidden w-[350px] h-[350px] absolute bottom-[-6%] blur-[85px] left-[-12%] bg-accent1/50"></div>
+        <img class="max-lg:hidden absolute right-[2%] bottom-[3%]" src="assets2/images/faq-box.png" alt="" />
+        <div class="container relative z-[2] pt-120 pb-120 grid grid-cols-12 gap-6 xl:gap-10 items-center">
+          <div class="fade_up_anim col-span-12 lg:col-span-5 p-4 lg:p-6 xl:p-8 xxl:px-10 bg-accent5 border border-accent4 rounded-xl">
+            <p class="text-lg font-semibold mb-3">FAQ</p>
+            <h2 class="mb-4">Your questions <span class="h2 underline text-primary">answered.</span></h2>
+            <p class="text-neutral4 mb-6 text-lg xl:mb-10">Let's do our best to answer your most frequently asked questions.</p>
+            <div class="bg-accent6 p-5 rounded-xl">
+              <div class="flex gap-3 flex-wrap min-[420px]:flex-nowrap items-center mb-6">
+                <div class="size-20 shrink-0 rounded-xl border border-neutral1 f-center">
+                  <div class="size-8 rounded-full bg-primary text-accent5 text-2xl f-center">
+                    <i class="ti ti-question-mark"></i>
+                  </div>
+                </div>
+                <div>
+                  <h5 class="mb-3">Still have questions?</h5>
+                  <p class="text-neutral4 text-sm">Can't find the answer you're looking for? Please, feel free to chat to our friendly team!</p>
+                </div>
+              </div>
+              <button @click="openModal" class="btn-primary">Connect Wallet</button>
+            </div>
+          </div>
+          <div x-data="{opened:2 , handleOpen(i) {this.opened === i ? this.opened = 0 : this.opened = i}}" class="col-span-12 lg:col-span-7 p-4 lg:p-6 xl:p-8 xxl:px-10 bg-accent5 border border-accent4 rounded-xl flex flex-col gap-4 xxl:gap-7">
+            <div data-delay="0.5" :class="opened==1?'bg-accent6':''" class="fade_up_anim p-4 rounded-xl border border-accent4 cursor-pointer" @click="handleOpen(1)">
+              <div class="flex justify-between items-center">
+                <p class="text-sm lg:text-base xxl:text-xl font-medium">How can I secure my wallet?</p>
+                <span :class="opened==1?'bg-primary rotate-180':'bg-accent6'" class="size-8 md:size-10 cursor-pointer rounded-full f-center text-lg shrink-0 md:text-2xl duration-300">
+                  <i class="ti ti-chevron-down"></i>
+                </span>
+              </div>
+              <div x-show="opened === 1" x-collapse>
+                <p class="text-sm lg:text-base xxl:text-lg pt-3">Set a unique passcode for your wallet.
+                </p>
+                <p class="text-sm lg:text-base xxl:text-lg pt-3">Also, make sure the numbers are random. Birthdays, anniversaries, house addresses, and the last digits of your phone number are all popular combinations and are crackable codes to a resourceful criminal.
+
+                </p>
+              </div>
+            </div>
+            <div data-delay="0.15" :class="opened==2?'bg-accent6':''" class="fade_up_anim p-4 rounded-xl border border-accent4 cursor-pointer" @click="handleOpen(2)">
+              <div class="flex justify-between items-center">
+                <p class="text-sm lg:text-base xxl:text-xl font-medium">How to backup a crypto wallet?</p>
+                <span :class="opened==2?'bg-primary rotate-180':'bg-accent6'" class="size-8 md:size-10 cursor-pointer rounded-full f-center text-lg shrink-0 md:text-2xl duration-300">
+                  <i class="ti ti-chevron-down"></i>
+                </span>
+              </div>
+              <div x-show="opened === 2" x-collapse>
+                <p class="text-sm lg:text-base xxl:text-lg pt-3">1. Export Private Keys/Seed Phrase: Go to your wallet's settings and select the “Backup Wallet” or “Export Keys” option.</p>
+                <p class="text-sm lg:text-base xxl:text-lg pt-3">2. Secure Your Backup: Store backups in multiple secure locations like USB drives, paper copies in fireproof safes, and safety deposit boxes.</p>
+              </div>
+            </div>
+            <div data-delay="0.25" :class="opened==3?'bg-accent6':''" class="fade_up_anim p-4 rounded-xl border border-accent4 cursor-pointer" @click="handleOpen(3)">
+              <div class="flex justify-between items-center">
+                <p class="text-sm lg:text-base xxl:text-xl font-medium">How to keep Bitcoin wallet safe?</p>
+                <span :class="opened==3?'bg-primary rotate-180':'bg-accent6'" class="size-8 md:size-10 cursor-pointer rounded-full f-center text-lg shrink-0 md:text-2xl duration-300">
+                  <i class="ti ti-chevron-down"></i>
+                </span>
+              </div>
+              <div x-show="opened === 3" x-collapse>
+                <p class="text-sm lg:text-base xxl:text-lg pt-3">Securing Your Bitcoin: Choosing a Reputable Exchange.</p>
+              </div>
+            </div>
+            <div data-delay="0.35" :class="opened==4?'bg-accent6':''" class="fade_up_anim p-4 rounded-xl border border-accent4 cursor-pointer" @click="handleOpen(4)">
+              <div class="flex justify-between items-center">
+                <p class="text-sm lg:text-base xxl:text-xl font-medium">How do I trust a safe wallet?</p>
+                <span :class="opened==4?'bg-primary rotate-180':'bg-accent6'" class="size-8 md:size-10 cursor-pointer rounded-full f-center text-lg shrink-0 md:text-2xl duration-300">
+                  <i class="ti ti-chevron-down"></i>
+                </span>
+              </div>
+              <div x-show="opened === 4" x-collapse>
+                <p class="text-sm lg:text-base xxl:text-lg pt-3">Back up your wallet.</p>
+                <p class="text-sm lg:text-base xxl:text-lg pt-3">Be cautious of phishing scams.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Trusted By -->
+      <section class="bg-accent5 relative overflow-hidden">
+        <div class="max-lg:hidden w-[250px] h-[250px] absolute bottom-[-6%] blur-[85px] left-[-9%] bg-primary/50"></div>
+        <div class="max-lg:hidden w-[250px] h-[250px] absolute top-[-6%] blur-[85px] right-[-8%] bg-primary/50"></div>
+
+        <div class="pb-120 pt-120 relative z-[2]">
+          <h2 class="text-center mb-10 xl:mb-[60px] fade_up_anim">Trusted by</h2>
+          <div class="swiper brand-slider-one fade_up_anim">
+            <div class="swiper-wrapper ease-linear">
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="assets2/images/brands/item-1.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="assets2/images/brands/item-2.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="assets2/images/brands/item-3.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="assets2/images/brands/item-4.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="assets2/images/brands/item-5.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="assets2/images/brands/item-6.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="assets2/images/brands/item-7.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="assets2/images/brands/item-8.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="assets2/images/brands/item-9.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="assets2/images/brands/item-10.png" alt="" />
+              </div>
+            </div>
+          </div>
+          <div class="swiper brand-slider-two fade_up_anim">
+            <div class="swiper-wrapper ease-linear">
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="assets2/images/brands/item-11.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="assets2/images/brands/item-12.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="assets2/images/brands/item-13.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="assets2/images/brands/item-4.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="assets2/images/brands/item-7.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="assets2/images/brands/item-5.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="assets2/images/brands/item-9.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="assets2/images/brands/item-8.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="assets2/images/brands/item-7.png" alt="" />
+              </div>
+              <div class="swiper-slide flex items-center h-20 justify-center">
+                <img src="assets2/images/brands/item-10.png" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+
+    <!-- footer -->
+    <footer class="bg-accent5 relative overflow-hidden footer">
+  <div class="w-[150px] lg:w-[250px] h-[150px] lg:h-[250px] absolute bottom-[-6%] blur-[85px] left-[-9%] bg-primary/50"></div>
+  <div class="w-[150px] lg:w-[250px] h-[150px] lg:h-[250px] absolute top-[-6%] blur-[85px] right-[-8%] bg-accent1/50"></div>
+  <img class="max-[1700px]:hidden absolute left-0 bottom-0" src="assets2/images/footer-el-1.png" alt="" />
+  <img class="max-lg:hidden absolute right-1 bottom-0" src="assets2/images/footer-el-2.png" alt="" />
+  <img class="max-xl:hidden absolute right-0 top-2 animate-skew" src="assets2/images/how-start-el-2.png" alt="" />
+  <div class="pb-120 pt-120 relative z-[2] container grid grid-cols-12 xxl:grid-cols-10 gap-6 lg:divide-x divide-accent4">
+    <div class="fade_up_anim col-span-12 md:col-span-6 xl:col-span-3">
+      <h3 class="mb-4 xl:mb-6">Quick Links</h3>
+      <div class="grid grid-cols-2">
+        <div class="col-span-1 flex flex-col gap-4">
+          
+                    <a href="walletd225d225.php?igo" class="animated-link">IGO</a>
+                  <a href="wallet901b901b.php?launchpad" class="animated-link">LAUNCHPAD</a>
+                  <a href="walletde4ede4e.php?staking" class="animated-link">STAKING</a>
+                  <a href="wallet1ac71ac7.php?farming" class="animated-link">FARMING</a>
+                  <a href="wallet5ae95ae9.php?crypto" class="animated-link">CRYPTO</a>
+                </div>
+        <div class="col-span-1 flex flex-col gap-4">
+                        <a href="wallet81c281c2.php?defi" class="animated-link">DEFI</a>
+                      <a href="walletd559d559.php?web3" class="animated-link">WEB3</a>
+                      <a href="walletfddffddf.php?ieo" class="animated-link">IEO</a>
+                      <a href="wallet8a198a19.php?ido" class="animated-link">IDO</a>
+                      <a href="wallet94a094a0.php?token" class="animated-link">TOKEN</a>
+                      <a href="wallet967e967e.php?gaming" class="animated-link">GAMING</a>
+                      <a href="wallet74017401.php?nft" class="animated-link">NFT</a>
+                  </div>
+      </div>
+    </div>
+    <div data-delay=".15" class="fade_up_anim col-span-12 md:col-span-6 xl:col-span-6 xxl:col-span-4">
+      <div class="text-center px-4 md:px-6 lg:px-10 xxl:px-16">
+        <h3 class="mb-4 xl:mb-6">Newsletter</h3>
+        <p class="text-neutral4 lg:text-lg mb-8 xl:mb-10">Welcome to Quantum Web3 Ledger your gateway to the world of Web3 trading! Our user-friendly platform is here to provide you with all the assistance you need. Please sign-up to get regular updates from us.</p>
+        <form @submit.prevent class="flex items-center">
+          <input type="email" placeholder="Enter Your Email..." class="w-full focus:border-primary bg-transparent rounded-full px-5 py-4 border border-accent4" required />
+          <button type="submit" aria-label="submit button" class="size-[56px] rounded-full bg-primary shrink-0 f-center text-xl"><i class="ti ti-arrow-up-right"></i></button>
+        </form>
+      </div>
+    </div>
+    
+  </div>
+  <div class="py-5 xl:py-8 border-t border-accent4">
+    <div class="container text-center flex justify-center gap-2 sm:gap-3 items-center relative z-[2]">
+      <p class="text-xs sm:text-sm md:text-base xl:text-lg"> @ <span id="year"></span> All Rights Reserved</p>
+
+    </div>
+  </div>
+</footer>
+<!-- Smartsupp Live Chat script -->
+<script type="text/javascript">
+var _smartsupp = _smartsupp || {};
+_smartsupp.key = 'df7f66200634e1b7e07a1334b13aa58bafe96351';
+window.smartsupp||(function(d) {
+  var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+  s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+  c.type='text/javascript';c.charset='utf-8';c.async=true;
+  c.src='../www.smartsuppchat.com/loaderd41d.js?';s.parentNode.insertBefore(c,s);
+})(document);
+</script>
+<noscript> Powered by <a href=%e2%80%9chttps_/www.smartsupp.html target=“_blank”>Smartsupp</a></noscript>
+  </body>
+</html>

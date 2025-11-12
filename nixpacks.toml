@@ -1,0 +1,4 @@
+[phases.build]
+cmds = ['composer install --no-dev']
+[start]
+cmd = 'php -S 0.0.0.0:$PORT'

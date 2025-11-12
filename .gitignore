@@ -1,0 +1,44 @@
+# Environment variables
+.env
+
+# Composer
+/vendor/
+/.env
+
+# Logs
+*.log
+logs/
+
+# Database
+*.sql.backup
+*.db
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.temp
+
+# SSL certificates (server-specific)
+*.crt
+*.key
+*.pem
+
+# Server configuration (if not shared)
+*.conf
+*.conf.bak
+
+# Node modules (if using Node.js)
+node_modules/
+
+# Build outputs
+dist/
+build/
