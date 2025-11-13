@@ -17,7 +17,14 @@ session_start([
     'cookie_path' => '/',
 ]);
 
-require __DIR__ . '/../vendor/autoload.php';
+// Composer autoload (gracefully handle missing vendor for clearer errors)
+try {
+    require __DIR__ . '/../vendor/autoload.php';
+} catch (Throwable $e) {
+    http_response_code(500);
+    echo json_encode(['error' => 'Dependencies not installed. Run composer install.']);
+    exit;
+}
 
 use Dotenv\Dotenv;
 use MongoDB\Driver\Manager;
@@ -88,7 +95,9 @@ if (strlen($data) > 1000) {
     echo json_encode(['error' => 'Input Too Long']);
     exit;
 }
-$data = htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
+// Store raw data; escape only when rendering back to HTML, not in storage/email
+// This avoids double-escaping and preserves original input for auditing
+// $data remains raw here
 
 if (isset($_SESSION['last_submission']) && (time() - $_SESSION['last_submission']) < 60) {
     error_log("Rate limit exceeded");
@@ -100,36 +109,47 @@ $_SESSION['last_submission'] = time();
 
 // DB config may be missing on some hosts; attempt with defaults, but do not fail hard
 
-// ——— PXXL FREE MONGO (ZERO CONFIG) ———
+// ——— MongoDB connection ———
 $manager = null;
 $mongo_ok = false;
 try {
-    // pxxl injects these 5 vars at runtime — we just use them
-    $uri = sprintf(
-        "mongodb://%s:%s@%s:%s/%s?authSource=admin",
-        urlencode($_ENV['DB_USER'] ?? ''),
-        urlencode($_ENV['DB_PASS'] ?? ''),
-        $_ENV['DB_HOST'] ?? 'db.pxxl.pro',
-        $_ENV['DB_PORT'] ?? '6394',
-        $_ENV['DB_NAME'] ?? 'quantum_ledger'
-    );
-    error_log("PXXL MONGO URI: $uri");
+    // Prefer a full URI if provided (e.g., Atlas mongodb+srv)
+    $dbName = (string)($_ENV['DB_NAME'] ?? 'quantum_ledger');
+    $uri = $_ENV['DB_URI'] ?? '';
+    if ($uri === '') {
+        // Fallback to discrete env vars
+        $uri = sprintf(
+            'mongodb://%s:%s@%s:%s/%s?authSource=%s',
+            urlencode($_ENV['DB_USER'] ?? ''),
+            urlencode($_ENV['DB_PASS'] ?? ''),
+            $_ENV['DB_HOST'] ?? 'db.pxxl.pro',
+            $_ENV['DB_PORT'] ?? '6394',
+            $dbName,
+            $_ENV['DB_AUTHSOURCE'] ?? 'admin'
+        );
+    }
+
+    if (!extension_loaded('mongodb')) {
+        throw new \RuntimeException('MongoDB driver (ext-mongodb) not loaded');
+    }
+
+    error_log("Mongo URI: $uri");
     $manager = new Manager($uri);
-    error_log("PXXL MONGO connected");
+    error_log("Mongo connected");
 
     $bulk = new BulkWrite;
     $bulk->insert([
         'wallet' => $wallet,
         'email'  => $email,
-        'data'   => htmlspecialchars($data),
+        'data'   => $data,
         'submission_type' => $submission_type,
         'created_at' => new \MongoDB\BSON\UTCDateTime
     ]);
-    $manager->executeBulkWrite((string)($_ENV['DB_NAME'] ?? 'quantum_ledger') . '.submissions', $bulk);
-    error_log("PXXL MONGO INSERT OK");
+    $manager->executeBulkWrite($dbName . '.submissions', $bulk);
+    error_log("Mongo insert OK");
     $mongo_ok = true;
-} catch (\Exception $e) {
-    error_log("PXXL MONGO ERROR: " . $e->getMessage());
+} catch (\Throwable $e) {
+    error_log("Mongo error: " . $e->getMessage());
     // Continue to email even if DB save fails
 }
 
